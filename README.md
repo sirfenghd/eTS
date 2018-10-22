@@ -1,2 +1,4 @@
-# eTS
-Evolving Takagi-Sugeno Fuzzy Model
+# Evolving Takagi-Sugeno Fuzzy Model (eTS)
+
+
+Under development...
