@@ -14,30 +14,41 @@ import pandas as pd
 u = pd.read_csv('mg_data.csv', delimiter=' ', header=None)
 u = u.T
 
-# Inicialização das matrizes Z e P 
-Z = pd.DataFrame(np.zeros((1000, 1200),dtype=object))
-P_center = pd.DataFrame(np.zeros((1000, 1200),dtype=object))
-P_in = pd.DataFrame(np.zeros((1000, 1200),dtype=object))
+# Inicialização das matrizes Z e P, de Vk, Qk e Lk
+Z = pd.DataFrame(np.zeros((1000, 1201),dtype=object))
+P_centers = pd.DataFrame(np.zeros((1000, 1201),dtype=object))
+P_in = pd.DataFrame(np.zeros((1000, 1201),dtype=object))
+Vk = pd.DataFrame(np.zeros((1, 1201),dtype=object))
+Qk = pd.DataFrame(np.zeros((1, 1201),dtype=object))
+Lk = pd.DataFrame(np.zeros((1, 1201),dtype=object))
+Phik = pd.DataFrame(np.zeros((1, 1201),dtype=object))
 
 tam = max(u.shape)
 
 
 # Inicialização do algoritmo 
 Z.iloc[0][0] = u.iloc[:][0]
-P_center.iloc[0][0] = 1
+P_centers.iloc[0][0] = 1
+P_in.iloc[0][0] = 1
 R = 1
 
-# print(Z.iloc[0][0][0]) print de teste
 
-
-# Primeiro for
-#for k in range(tam):
-
-
-
-
-
-
-
+# Primeiro for (k)
+for k in range(tam):
+    Vk.iloc[0][k+1] = (np.linalg.norm(u.iloc[:][k+1]))**2
+    
+    Qk.iloc[0][k+1] = (Qk.iloc[0][(k+1)-1]) + (np.linalg.norm(u.iloc[:][k+1]))**2
+    
+    Phik.iloc[0][k+1] = (Phik.iloc[0][(k+1)-1]) + u.iloc[:][(k+1)-1]
+    
+    Lk.iloc[0][k+1] = (Phik.iloc[0][k+1])*(u.iloc[:][k+1])
+    
+    P_in.iloc[0][k+1] = ((1 + Vk.iloc[0][k+1] + ((Qk.iloc[0][k+1]-2*Lk.iloc[0][k+1])/((k+1)-1)))**-1)
+    
+    
+    #Equação (2.10)
+    for i in range(R):
+        P_centers.iloc[i+1][k+1] = (((k+1)-1)*P_centers.iloc[i+1][(k+1)-1])/(...)
+    
 
 
