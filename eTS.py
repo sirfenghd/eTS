@@ -34,7 +34,7 @@ R = 1
 
 
 # Primeiro for (k)
-for k in range(tam):
+for k in range(tam+1):
     Vk.iloc[0][k+1] = (np.linalg.norm(u.iloc[:][k+1]))**2
     
     Qk.iloc[0][k+1] = (Qk.iloc[0][(k+1)-1]) + (np.linalg.norm(u.iloc[:][k+1]))**2
@@ -47,8 +47,23 @@ for k in range(tam):
     
     
     #Equação (2.10)
-    for i in range(R):
-        P_centers.iloc[i+1][k+1] = (((k+1)-1)*P_centers.iloc[i+1][(k+1)-1])/(...)
+    for i in range(R+1):
+        P_centers.iloc[i+1][k+1] = ((((k+1)-1)*P_centers.iloc[i+1][(k+1)-1])/((k+1)-2+P_centers.iloc[i+1][(k+1)-1]*
+                      (1+(np.linalg.norm(Z.iloc[i+1][k+1] - Z.iloc[i+1][(k+1)-1]))**2)))
     
+    
+    # Condição de substituição 
+    if P_in.iloc[0][k+1] > P_centers[k+1].max() :
+        
+        if #segunda condição 2.12
+
+
+        
+        
+        
+    
+
+
+
 
 
